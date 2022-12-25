@@ -4,6 +4,7 @@
 package com.yzh.wanandroid.network.service
 
 import com.yzh.wanandroid.network.response.ArticleResponse
+import com.yzh.wanandroid.network.response.HttpResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,5 +16,5 @@ import retrofit2.http.Path
 interface WanAndroidService {
 
     @GET("article/list/{index}/json")
-    fun getArticleList(@Path("index") index: Int): Call<ArticleResponse>
+    fun getArticleList(@Path("index") index: Int): Call<HttpResult<ArticleResponse>>
 }
