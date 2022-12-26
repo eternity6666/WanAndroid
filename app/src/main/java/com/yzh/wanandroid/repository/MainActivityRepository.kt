@@ -4,6 +4,7 @@
 package com.yzh.wanandroid.repository
 
 import android.util.Log
+import com.yzh.wanandroid.network.core.RetrofitHelper.retrofit
 import com.yzh.wanandroid.network.response.Article
 import com.yzh.wanandroid.network.response.ArticleResponse
 import com.yzh.wanandroid.network.response.HttpResult
@@ -15,8 +16,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * @author baronyang@tencent.com
@@ -26,6 +25,10 @@ class MainActivityRepository {
 
     private val _articleList = MutableStateFlow<List<Article>>(emptyList())
     val list: Flow<List<Article>> = _articleList
+
+    private val wanAndroidService: WanAndroidService by lazy {
+        retrofit.create(WanAndroidService::class.java)
+    }
 
     fun loadData() {
         wanAndroidService.getArticleList(0).enqueue(object : Callback<HttpResult<ArticleResponse>?> {
@@ -47,14 +50,5 @@ class MainActivityRepository {
 
     companion object {
         private const val TAG: String = "MainActivityRepository"
-        val retrofit by lazy {
-            Retrofit.Builder()
-                .baseUrl("https://www.wanandroid.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-        val wanAndroidService by lazy {
-            retrofit.create(WanAndroidService::class.java)
-        }
     }
 }
