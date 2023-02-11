@@ -52,10 +52,36 @@ data class Article(
     val shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<Any>,
+    val tags: List<Tag>,
     val title: String,
     val type: Int,
     val userId: Int,
     val visible: Int,
     val zan: Int
+)
+
+data class Tag(
+    val name: String,
+    val url: String,
+)
+
+data class BannerCard(
+    val desc: String,
+    val id: Int,
+    val imagePath: String,
+    val isVisible: Boolean,
+    val order: Int,
+    val title: String,
+    val type: Int,
+    val url: String,
+)
+
+data class Friend(
+    val category: String,
+    val icon: String,
+    val id: Int,
+    val link: String,
+    val name: String,
+    val order: Int,
+    val visible: Int
 )
